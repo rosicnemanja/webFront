@@ -1,0 +1,48 @@
+<body>
+        <div *ngIf="isLoggedUserAdmin">
+            <h3> Complaints for subforums: </h3>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-info" *ngFor="let x of complaintsForSubforums">
+                    <b>Complaint for "{{x.Subforum.Name}}" </b>
+                    <br> <small>Complaint text: {{x.Text}}</small>
+                    <br> <small>On: {{x.Date}}</small>
+                    <br> <i> <small >Author of complaint: {{x.User.Name + " " + x.User.LastName}}</small>   </i>
+                    <br> <i> <small >Author of subforum: {{x.Subforum.ResponsibleModerator.Name + " " + x.Subforum.ResponsibleModerator.LastName}}</small>   </i>
+                    <br> <button (click)=acceptSubforumComplaint(x) class="btn btn-success">Accept</button>
+                    <button (click)=warnAuthorOfSubforum(x) class="btn btn-primary">Warn author</button>
+                    <button (click)=declineSubforumComplaint(x) class="btn btn-danger">Reject</button>        
+                </li>
+            </ul>
+        </div>   
+        <div> 
+            <h3> Complaints for themes: </h3>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-info" *ngFor="let themeComplaint of complaintsForThemes">
+                    <b>Complaint for "{{themeComplaint.Theme.Title}}" </b>
+                    <br> <small>Complaint text: {{themeComplaint.Text}}</small>
+                    <br> <small>On: {{themeComplaint.Date}}</small>
+                    <br> <i> <small >Author of complaint: {{themeComplaint.User.Name + " " + themeComplaint.User.LastName}}</small>   </i>
+                    <br> <i> <small >Author of theme: {{themeComplaint.Theme.Author.Name + " " + themeComplaint.Theme.Author.LastName}}</small>   </i>
+                    <br> <button (click)=acceptThemeComplaint(themeComplaint) class="btn btn-success">Accept</button>
+                    <button (click)=warnAuthor(themeComplaint) class="btn btn-primary">Warn author</button>
+                    <button (click)=declineThemeComplaint(themeComplaint) class="btn btn-danger">Reject</button>
+                </li>
+            </ul>
+        </div>
+            <div>
+            <h3> Complaints for comments: </h3>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-info" *ngFor="let commentComplaint of complaintsForComments">
+                    <b>Complaint for "{{commentComplaint.Comment.Content}}" </b>
+                    <br> <small>Complaint text: {{commentComplaint.Text}}</small>
+                    <br> <small>On: {{commentComplaint.Date}}</small>
+                    <br> <i> <small >Author of complaint: {{commentComplaint.User.Name + " " + commentComplaint.User.LastName}}</small> </i>
+                    <br> <i> <small >Author of comment: {{commentComplaint.Author.Name + " " + commentComplaint.Author.LastName}}</small>   </i>
+                    <br> <button (click)=acceptCommentComplaint(commentComplaint) class="btn btn-success">Accept</button> 
+                    <button (click)=warnAuthorOfComment(commentComplaint) class="btn btn-primary">Warn author</button>
+                    <button (click)=declineCommentComplaint(commentComplaint) class="btn btn-danger">Reject</button>
+                </li>
+            </ul>
+        </div>
+            <button style="margin-bottom:1em;margin-left:1em" [routerLink]="['/home']" class="btn btn-primary">Go to home</button>
+</body>
